@@ -26,6 +26,7 @@ def createDB():
 	conn.close()
 
 
+# function to delete the database
 def deleteDB():
 	# maybe add a confirmation message here
 	os.remove('pokemon.db')
@@ -46,6 +47,18 @@ def insert(pokemon):
 	conn.commit()
 	conn.close()
 
+
+# delete a pokemon from the database
+def delete(pokemon):
+	conn = sqlite3.connect('pokemon.db')
+	c = conn.cursor()
+	# insertion data into database
+	# note!!! Will need to format pokemon.locations properly!!!
+	c.execute("DELETE from pokemonlist where pokemon = :pkmn",{'pkmn': pokemon.name})
+	conn.commit()
+	conn.close()
+
+
 # reference for how to spit a string
 def split(data):
 	arry = data.split(', ')
@@ -64,5 +77,5 @@ try:
 	print('\nSuccess!')
 except:
 	print('\nFailed to insert data')
-# TODO: delete data from database
+delete(pkm1)
 
